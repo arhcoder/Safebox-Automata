@@ -6,6 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--| Estilos CSS |-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="styles/alerts.css">
     <link rel="stylesheet" href="styles/layout.css">
     <!-- | Tipografías | -->
     <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
@@ -18,14 +22,15 @@
 </head>
 
 <body onload="refresh()">
+
     <div class="top-panel">
-        <div class="titular"><h1>Contraseña</h1><button class="set-password" onclick="refresh(); reset()"><img class="password-button" src="img/edit.svg"></button></div>
+        <div class="titular"><h1>Contraseña</h1><button class="set-password" onclick="refresh(); reset();"><img class="password-button" src="img/edit.svg"></button></div>
         <div id="password-bar"><h2 id="password-text"></h2></div>
     </div>
 
-    <div class="content">
+    <div class="contentbox">
         <div class="safebox">
-            
+            <img name="box" src="/app/img/box-closed.svg" alt="BOX" class="box">
         </div>
     </div>
 
@@ -37,6 +42,27 @@
         </div>
         <button class="reset-button" id="reset-button-id" onclick="reset()"><img class="reset-icon" src="img/reset.svg"></button>
     </div>
+
+    <div id="victory" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<form onsubmit="close()">
+					<div class="modal-header">
+						<h4 class="modal-title">¡FELICIDADES!</h4>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					</div>
+					<div class="modal-body">
+						<h3>Has encontrado un gato 🐱</h3>
+                        <img class="gato" src="https://i.kym-cdn.com/photos/images/original/002/486/154/c06.gif" alt="Gato girando">
+					<div class="modal-footer">
+						<input type="button" onclick="meow()" class="btn btn-default"value="Acariciar">
+						<input type="button" onclick="closeok()" class="btn btn-success" data-dismiss="modal" value="Adoptar">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
 </body>
 
 </html>
