@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--| Estilos CSS |-->
+    <link rel="stylesheet" href="styles/layout.css">
+    <!-- | Tipografías | -->
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
+    <!--| Scripts |-->
+    <script src="scripts/safebox.js"></script>
+    <!--| Favicon |-->
+    <link rel="icon" type="image/x-icon" href="img/favicon.svg">
+    <title>Caja Fuerte Autómata</title>
+</head>
+
+<body onload="refresh()">
+    <div class="top-panel">
+        <div class="titular"><h1>Contraseña</h1><button class="set-password" onclick="refresh(); reset()"><img class="password-button" src="img/edit.svg"></button></div>
+        <div id="password-bar"><h2 id="password-text"></h2></div>
+    </div>
+
+    <div class="content">
+        <div class="safebox">
+            
+        </div>
+    </div>
+
+    <div class="bottom-panel">
+        <div class="control-panel">
+            <button id="left-button" class="direction-button" onclick="moveLeft()"><div class="left-direction-button"></div></button>
+            <div class="output-bar" id="output-bar"><h2 id="output-text"></h2></div>
+            <button id="right-button" class="direction-button" onclick="moveRight()"><div class="right-direction-button"></div></button>
+        </div>
+        <button class="reset-button" id="reset-button-id" onclick="reset()"><img class="reset-icon" src="img/reset.svg"></button>
+    </div>
+</body>
+
+</html>

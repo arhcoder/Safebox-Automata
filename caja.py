@@ -3,7 +3,7 @@
 '''
 
 from dfa import DFA
-from generator import generateDFA
+from draw import generateDFA
 import os
 
 class Caja:
@@ -16,7 +16,7 @@ class Caja:
 
     #* Constructor:
     def __init__(self, combination: str = ""):
-        if len(combination) > 4:
+        if len(combination) >= 4:
             self.password = combination
             self.dfa = generateDFA(self.password)
         else:
@@ -33,9 +33,11 @@ class Caja:
     
     #* ----------------------------------------------------
 
+    # Métodos de entr
+
     #? Métodos:
     def reset(self, newPassword):
-        if len(newPassword) > 4:
+        if len(newPassword) >= 4:
             self.password = newPassword
             self.dfa = generateDFA(self.password)
         else:
