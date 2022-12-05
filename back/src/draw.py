@@ -1,4 +1,4 @@
-from dfa import DFA
+from src.dfa import DFA
 
 def generateDFA(password: str):
     
@@ -120,13 +120,13 @@ def generateDFA(password: str):
             podría significar que es el primer símbolo correcto de la contraseña.
     '''
     print()
-    index += 1
     #* Si toca cambiar de dirección al siguiente movimiento;
     #* Esto porque el siguiente caracter es diferente al actual:
     if index != len(password)-1 and password[index] != password[index+1]:
         change = True
     else:
         change = False
+    index += 1
     
     while index < len(password):
 

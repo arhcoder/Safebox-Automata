@@ -2,8 +2,8 @@
     CAJA FUERTE SIMULADA CON AUTÓMATAS
 '''
 
-from dfa import DFA
-from draw import generateDFA
+from src.dfa import DFA
+from src.draw import generateDFA
 import os
 
 class Caja:
@@ -48,6 +48,9 @@ class Caja:
         self.dfa.transite(direction)
         if self.dfa.actual in self.dfa.Finals:
             self.open()
+            return True
+        else:
+            return False
     
     def open(self):
         print("\n\n¡¡¡CAJA ABIERTA!!!")

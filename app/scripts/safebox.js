@@ -33,6 +33,9 @@ function refresh()
         password += " ";
     }
 
+    //? GENERA EL AUTÓMATA:
+    
+
     // Escribe la contraseña en la barra de texto:
     document.getElementById("password-text").innerHTML = password;   
 
