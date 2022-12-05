@@ -6,8 +6,10 @@ var opensnd = new Audio("sound/open.mp3");
 var closesnd = new Audio("sound/close.mp3");
 var fanfaresnd = new Audio("sound/fanfare.mp3");
 var purrsnd = new Audio("sound/purr.mp3");
+var resetURL = "http://localhost:8000/reset/?format=json&password=";
+var moveURL = "http://localhost:8000/move/?format=json&direction=";
 
-function refresh()
+async function refresh()
 {
     /// CREA UNA CONTRASEÑA ALEATORIA ///
     // Para saber si comienza con "L" o con "R":
@@ -34,10 +36,19 @@ function refresh()
     }
 
     //? GENERA EL AUTÓMATA:
-    
+    let urlPassword = password.replaceAll(" ", "");
+    response = await fetch(resetURL+urlPassword);
+    if (response.ok)
+    {
+        console.log("Autómata regenerado :3");
+    }
+    else
+    {
+        alert("Error! El autómata no se pudo generar :(");
+    }
 
     // Escribe la contraseña en la barra de texto:
-    document.getElementById("password-text").innerHTML = password;   
+    document.getElementById("password-text").innerHTML = password;
 
     // Refresca la barra de output:
     document.getElementById("output-text").innerHTML = "ㅤ";
@@ -47,20 +58,54 @@ function refresh()
     closesnd.play();
 }
 
-function moveLeft()
+async function moveLeft()
 {
     // Agrega una "L" al output y refresca en pantalla:
     output += "L";
     document.getElementById("output-text").innerHTML = output;
+    clicksnd.play();
+
+    //? MUEVE EL AUTÓMATA:
+    response = await fetch(moveURL+"L");
+    if (response.status != 200)
+    {
+        alert("Error al mover el autómata :(");
+    }
+    else
+    {
+        json = await response.json();
+        console.log(json.open)
+        if (json.open)
+        {
+            open();
+        }
+    }
 }
-function moveRight()
+async function moveRight()
 {
     // Agrega una "R" al output y refresca en pantalla:
     output += "R";
     document.getElementById("output-text").innerHTML = output;
+    clicksnd.play();
+
+    //? MUEVE EL AUTÓMATA:
+    response = await fetch(moveURL+"R");
+    if (response.status != 200)
+    {
+        alert("Error al mover el autómata :(");
+    }
+    else
+    {
+        json = await response.json();
+        console.log(json.open)
+        if (json.open)
+        {
+            open();
+        }
+    }
 }
 
-function reset()
+async function reset()
 {
     // Borra la barra de output:
     output = "ㅤ";
@@ -69,6 +114,18 @@ function reset()
     // Cambia el svg a la caja cerrada:
     document.querySelector("img[name=box]").src = "img/box-closed.svg";
     closesnd.play();
+
+    //? GENERA EL AUTÓMATA:
+    let urlPassword = password.replaceAll(" ", "");
+    response = await fetch(resetURL+urlPassword);
+    if (response.ok)
+    {
+        console.log("Autómata regenerado :3");
+    }
+    else
+    {
+        alert("Error! El autómata no se pudo generar :(");
+    }
 }
 
 
@@ -105,7 +162,6 @@ window.addEventListener("keyup", function (eventkey)
         var button = this.document.getElementById("left-button");
         button.classList.remove("active-left");
         button.classList.remove("active-press");
-        clicksnd.play();
         moveLeft();
     }
     else if (eventkey.code === "ArrowRight" || eventkey.code === "KeyR")
@@ -113,7 +169,6 @@ window.addEventListener("keyup", function (eventkey)
         var button = this.document.getElementById("right-button");
         button.classList.remove("active-right");
         button.classList.remove("active-press");
-        clicksnd.play();
         moveRight();
     }
     else if (eventkey.code === "Enter" || eventkey.code === "Space")
